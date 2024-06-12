@@ -1,4 +1,8 @@
-import { Metadata } from 'next'
+'use client'
+import useSWR from 'swr'
+import { getPost } from '@/services/getPosts'
+import { IPost } from '@/models/IPost'
+import { Loading } from '@/components/Loading'
 
 interface Props {
   params: {
@@ -6,33 +10,15 @@ interface Props {
   }
 }
 
-const getData = async (id: string) => {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-    next: {
-      revalidate: 60
-    }
-  })
+const Post: React.FC<Props> = ({ params: { id } }) => {
+  const { data: post, isLoading } = useSWR<IPost>(`post-${id}`, () => getPost(id))
 
-  if (!response.ok) throw new Error(`${response.status} ${response.statusText}`)
-
-  return await response.json()
-}
-
-export const generateMetadata = async ({ params: { id } }: Props): Promise<Metadata> => {
-  const post = await getData(id)
-
-  return {
-    title: post.title,
-  }
-}
-
-const Post: React.FC<Props> = async ({ params: { id } }) => {
-  const post = await getData(id)
+  if (isLoading) return <Loading/>
 
   return (
     <>
-      <h1>{post.title}</h1>
-      <p>{post.body}</p>
+      <h1>{post!.title}</h1>
+      <p>{post!.body}</p>
     </>
   )
 }

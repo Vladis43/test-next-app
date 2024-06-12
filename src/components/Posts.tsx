@@ -3,11 +3,12 @@ import Link from 'next/link'
 import useSWR from 'swr'
 import { IPost } from '@/models/IPost'
 import { getAllPosts } from '@/services/getPosts'
+import { Loading } from '@/components/Loading'
 
 export const Posts = () => {
   const { data: posts, isLoading } = useSWR<IPost[]>('posts', getAllPosts)
 
-  if (isLoading) return <h3>Loading...</h3>
+  if (isLoading) return <Loading/>
 
   return (
     <ul>

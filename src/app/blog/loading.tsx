@@ -1,3 +1,5 @@
+import { Loading } from '@/components/Loading'
+
 export default function LoadingPosts() {
-  return <h1>Loading...</h1>
+  return <Loading/>
 }
