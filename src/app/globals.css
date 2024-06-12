@@ -29,7 +29,7 @@ header {
   justify-content: center;
   align-items: center;
   gap: 50px;
-  background-color: black;
+  background-color: white;
 }
 
 main {
@@ -43,5 +43,9 @@ main {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+
+  header {
+    background-color: black;
   }
 }
