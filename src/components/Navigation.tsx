@@ -16,8 +16,6 @@ export const Navigation = ({ links }: Props) => {
   const pathname = usePathname()
   const session = useSession()
 
-  console.log(pathname)
-
   return (
     <>
       {links.map((link) => {
