@@ -24,16 +24,18 @@ a {
 }
 
 header {
-  height: 70px;
+  /*height: 70px;*/
+  padding: 1.5rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 50px;
-  background-color: white;
+  background-color: black;
+  color: white;
 }
 
 main {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -43,9 +45,5 @@ main {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
-  }
-
-  header {
-    background-color: black;
   }
 }

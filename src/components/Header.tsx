@@ -1,9 +1,18 @@
-import Link from 'next/link'
+import { Navigation } from '@/components/Navigation'
+
+interface NavLink {
+  href: string
+  text: string
+}
+
+const navLinks: NavLink[] = [
+  { href: '/', text: 'Home' },
+  { href: '/blog', text: 'Blog' },
+  { href: '/about', text: 'About' },
+]
 
 export const Header = () => (
   <header>
-    <Link href="/">Home</Link>
-    <Link href="/blog">Blog</Link>
-    <Link href="/about">About</Link>
+    <Navigation links={navLinks}/>
   </header>
 )
