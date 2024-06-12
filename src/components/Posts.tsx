@@ -1,22 +1,17 @@
 'use client'
 import Link from 'next/link'
-import { shallow } from 'zustand/shallow'
+import useSWR from 'swr'
 import { IPost } from '@/models/IPost'
-import { usePosts } from '@/store'
-import { useEffect } from 'react'
+import { getAllPosts } from '@/services/getPosts'
 
 export const Posts = () => {
-  const [posts, loading, getAllPosts] = usePosts(state => [state.posts, state.loading, state.getAllPosts], shallow)
+  const { data: posts, isLoading } = useSWR<IPost[]>('posts', getAllPosts)
 
-  useEffect(() => {
-    (async () => await getAllPosts())()
-  }, [getAllPosts])
-
-  if (loading) return <h3>Loading...</h3>
+  if (isLoading) return <h3>Loading...</h3>
 
   return (
     <ul>
-      {posts.map((post: IPost) => (
+      {posts!.map((post: IPost) => (
         <li key={post.id}>
           <Link href={`blog/${post.id}`}>{post.title}</Link>
         </li>
